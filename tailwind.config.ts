@@ -11,6 +11,17 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        yellow: "#FF9800",
+        blue: "#2997ff",
+        purple: "#a972ff",
+        "mx-teal": "#43B9B9",
+        teal: "#43B9B9",
+        gradient:
+          "linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)",
+      },
+      backgroundImage: {
+        "ai-gradient":
+          "linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)",
       },
     },
   },
