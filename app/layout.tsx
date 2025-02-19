@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CursorProvider } from "@/components/CursorEffects/CursorProvider";
+import CustomScrollbar from "@/components/CustomScrollbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <CursorProvider>
+          {children}
+          <CustomScrollbar />
+        </CursorProvider>
       </body>
     </html>
   );

@@ -22,7 +22,7 @@ interface Mouse {
 }
 
 const InteractiveWeb: React.FC<InteractiveWebProps> = ({
-  zIndex = -10,
+  zIndex = 1,
   backgroundColor = "black",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -227,6 +227,7 @@ const InteractiveWeb: React.FC<InteractiveWebProps> = ({
         style={{
           zIndex,
           backgroundColor,
+          touchAction: "none",
         }}
         aria-hidden="true"
       />

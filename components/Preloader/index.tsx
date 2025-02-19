@@ -50,13 +50,13 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
     ); // show name
     const timer8 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, boxPhase: 3 })),
-      4500
+      5000
     ); // start shrinking
 
     // Complete loading
     const completeTimer = setTimeout(() => {
       if (onLoadingComplete) onLoadingComplete();
-    }, 4500);
+    }, 6000);
 
     return () => {
       [
@@ -107,7 +107,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
                 : "opacity-0 translate-y-4"
             }`}
         >
-          Pioneering
+          Visualize
         </span>
         <span
           className={`font-bold transition-all duration-700 transform text-purple
@@ -117,7 +117,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
                 : "opacity-0 translate-y-4"
             }`}
         >
-          Creative
+          Design
         </span>
         <span
           className={`transition-all duration-700 transform
@@ -127,7 +127,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
                 : "opacity-0 translate-y-4"
             }`}
         >
-          Excellence
+          Develop
         </span>
       </div>
 
