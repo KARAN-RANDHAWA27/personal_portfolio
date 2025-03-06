@@ -39,7 +39,7 @@ const Hero = () => {
   return (
     <div
       ref={heroRef}
-      className="relative min-h-screen bg-black text-white px-6"
+      className="relative min-h-screen bg-black text-white lg:px-36"
     >
       {/* Web animation layer */}
       <div className="absolute inset-0">
@@ -100,8 +100,11 @@ const Hero = () => {
 
       {/* Scroll indicator */}
       {isInHeroSection && (
-        <div className="absolute bottom-8 right-8 z-10" onClick={scrollToAbout}>
-          <div className="relative w-16 h-16 cursor-pointer group">
+        <div
+          className="absolute bottom-8 right-8 z-10 lg:px-32"
+          onClick={scrollToAbout}
+        >
+          <div className="relative h-16 w-16 lg:w-40 lg:h-40 cursor-pointer group">
             {/* Rotating text */}
             <div
               className="absolute inset-0"
@@ -124,7 +127,7 @@ const Hero = () => {
 
             {/* Orange circle and arrow */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center group-hover:bg-orange-600 transition-colors">
+              <div className="w-10 h-10 lg:w-24 lg:h-24 bg-orange-500 rounded-full flex items-center justify-center group-hover:bg-orange-600 transition-colors">
                 <svg
                   className="w-5 h-5 text-black transform transition-transform group-hover:translate-y-1"
                   fill="none"
