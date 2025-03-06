@@ -1,6 +1,6 @@
 name: Deploy to Vercel
 env:
-  VERCEL_ID: ZXZ1AISAQ1pziKX22h6Za22H
+  VERCEL_ORG_ID: ZXZ1AISAQ1pziKX22h6Za22H
   VERCEL_PROJECT_ID: prj_JKSYTJjryrlFwfAb6nqdWhVD5CGQ
 on:
   push:
