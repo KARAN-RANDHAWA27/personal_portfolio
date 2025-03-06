@@ -140,7 +140,10 @@ const AboutMe = () => {
   }, []);
 
   return (
-    <div className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black py-16 md:py-20 lg:py-28">
+    <div
+      id="about"
+      className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-black py-16 md:py-20 lg:py-28"
+    >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
       <div className="relative z-10 w-full mx-auto px-4 sm:px-6 lg:px-8">
