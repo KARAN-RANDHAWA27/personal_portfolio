@@ -1,71 +1,76 @@
 import type { Config } from "tailwindcss";
 
 export default {
-    darkMode: ["class"],
-    content: [
+  darkMode: ["class"],
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-  	extend: {
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			yellow: '#FF9800',
-  			blue: '#2997ff',
-  			purple: '#a972ff',
-  			'mx-teal': '#43B9B9',
-  			teal: '#43B9B9',
-  			gradient: 'linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		},
-  		backgroundImage: {
-  			'ai-gradient': 'linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)'
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		}
-  	}
+    extend: {
+      colors: {
+        yellow: "#FF9800",
+        blue: "#2997ff",
+        purple: "#a972ff",
+        "mx-teal": "#43B9B9",
+        teal: "#43B9B9",
+        primary: {
+          50: "#EEE6FF",
+          100: "#D6C4FF",
+          200: "#B699FF",
+          300: "#9370FF",
+          400: "#7C51FC",
+          500: "#6938EF", // Main primary color
+          600: "#5227D5",
+          700: "#3E1AB8",
+          800: "#2B1090",
+          900: "#1C0A6B",
+        },
+        secondary: {
+          50: "#E6FBFF",
+          100: "#B3F1FF",
+          200: "#80E8FF",
+          300: "#4DDBFF",
+          400: "#26CFFF",
+          500: "#00C2FF", // Main secondary color
+          600: "#0099D6",
+          700: "#0073B0",
+          800: "#00578A",
+          900: "#003F66",
+        },
+        accent: {
+          50: "#E6FFF6",
+          100: "#B3FFE6",
+          200: "#80FFD6",
+          300: "#4DFFCD",
+          400: "#26FFC6",
+          500: "#00EDAD", // Main accent color
+          600: "#00C492",
+          700: "#009B77",
+          800: "#00755C",
+          900: "#005142",
+        },
+        dark: {
+          50: "#676767",
+          100: "#5a5a5a",
+          200: "#4c4c4c",
+          300: "#3f3f3f",
+          400: "#323232",
+          500: "#252525",
+          600: "#181818",
+          700: "#141414",
+          800: "#0D0D0D",
+          900: "#080808", // Darkest shade for backgrounds
+        },
+        gradient:
+          "linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)",
+      },
+      backgroundImage: {
+        "ai-gradient":
+          "linear-gradient(97deg, #0096FF, #BB64FF 42%, #F2416B 74%, #EB7500)",
+      },
+    },
   },
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
