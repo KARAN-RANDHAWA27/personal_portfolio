@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-key */
+"use client";
 import React, { useRef, useState } from "react";
 import {
   motion,

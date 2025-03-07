@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const Navbar = () => {
@@ -31,21 +32,24 @@ const Navbar = () => {
             </button>
           </div>
           <nav className="space-y-6">
-            <a href="#" className="block text-orange-500 text-xl">
+            <Link href="/" className="block text-orange-500 text-xl">
               Homepage
-            </a>
-            <a href="#" className="block text-white text-xl">
-              Portfolio
-            </a>
-            <a href="#" className="block text-white text-xl">
-              Services
-            </a>
-            <a href="#" className="block text-white text-xl">
-              Newsletter
-            </a>
-            <a href="#" className="block text-white text-xl">
-              Other pages
-            </a>
+            </Link>
+            <Link href="/about" className="block text-white text-xl">
+              About Me
+            </Link>
+            <Link href="/career" className="block text-white text-xl">
+              Career
+            </Link>
+            <Link href="/education" className="block text-white text-xl">
+              Education
+            </Link>
+            <Link href="/projects" className="block text-white text-xl">
+              Projects
+            </Link>
+            <Link href="/testimonials" className="block text-white text-xl">
+              Testimonials
+            </Link>
           </nav>
         </div>
       </div>

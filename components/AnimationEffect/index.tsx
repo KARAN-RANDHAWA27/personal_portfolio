@@ -1,3 +1,4 @@
+"use effect";
 import React, { useRef, useEffect } from "react";
 
 const SubtleParticleBackground: React.FC = () => {

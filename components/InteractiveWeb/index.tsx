@@ -1,3 +1,5 @@
+"use effect";
+
 import React, { useEffect, useRef } from "react";
 
 interface InteractiveWebProps {

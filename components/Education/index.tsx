@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { GraduationCap, Award, Calendar, MapPin, BookOpen } from "lucide-react";
