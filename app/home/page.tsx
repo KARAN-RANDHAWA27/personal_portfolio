@@ -1,30 +1,20 @@
 "use client";
+import Hero from "@/components/Hero";
 import React from "react";
-import dynamic from "next/dynamic";
-const Hero = dynamic(() => import("@/components/Hero"), { ssr: false });
-const About = dynamic(() => import("@/components/About"), { ssr: false });
-const CareerSection = dynamic(() => import("@/components/Career"), {
-  ssr: false,
-});
-const EducationSection = dynamic(() => import("@/components/Education"), {
-  ssr: false,
-});
-const SkillsSection = dynamic(() => import("@/components/Skills"), {
-  ssr: false,
-});
-const ProjectsSection = dynamic(() => import("@/components/Projects"), {
-  ssr: false,
-});
-const TestimonialSection = dynamic(() => import("@/components/Testimonials"), {
-  ssr: false,
-});
-const ContactForm = dynamic(() => import("@/components/Contact"), {
-  ssr: false,
-});
+import About from "../about/page";
+import CareerSection from "@/components/Career";
+import EducationSection from "@/components/Education";
+import SkillsSection from "@/components/Skills";
+import ProjectsSection from "@/components/Projects";
+import TestimonialSection from "@/components/Testimonials";
+import ContactForm from "@/components/Contact";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 const HomePage = () => {
   return (
     <div className="">
+      <Navbar />
       <Hero />
       <About />
       <CareerSection />
@@ -33,6 +23,7 @@ const HomePage = () => {
       <ProjectsSection />
       <TestimonialSection />
       <ContactForm />
+      <Footer />
     </div>
   );
 };

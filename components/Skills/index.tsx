@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect, ReactNode } from "react";
 import {
   motion,
   useScroll,
@@ -26,6 +26,9 @@ interface Skill {
   level: number; // 1-10
   color: string;
   libraries?: string[];
+}
+interface ClientOnlyProps {
+  children: ReactNode;
 }
 
 // Dynamic particle component for background
@@ -72,6 +75,60 @@ const ParticleBackground = () => {
             ease: "linear",
           }}
         />
+      ))}
+    </div>
+  );
+};
+
+// Matrix rain effect - fixed to avoid window reference
+const MatrixEffect = () => {
+  const [windowHeight, setWindowHeight] = useState(1000); // Default fallback value
+  const columns = 20;
+
+  // Update windowHeight after component mounts
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+  }, []);
+
+  const characters = Array.from({ length: columns }, () => ({
+    chars: Array.from({ length: Math.floor(Math.random() * 20) + 10 }, () =>
+      String.fromCharCode(Math.floor(Math.random() * 93) + 33)
+    ),
+    x: Math.random() * 100,
+    speed: Math.random() * 3 + 1,
+  }));
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {characters.map((column, colIdx) => (
+        <div
+          key={colIdx}
+          className="absolute text-primary-500 text-xs font-mono"
+          style={{
+            left: `${column.x}%`,
+            top: "-20px",
+            opacity: 0.15,
+            writingMode: "vertical-rl",
+          }}
+        >
+          {column.chars.map((char, charIdx) => (
+            <motion.span
+              key={charIdx}
+              animate={{
+                opacity: [0, 0.8, 0],
+                y: [-20, windowHeight],
+              }}
+              transition={{
+                duration: column.speed * 10,
+                delay: charIdx * 0.15,
+                repeat: Infinity,
+                repeatDelay: Math.random() * 5,
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </div>
       ))}
     </div>
   );
@@ -184,51 +241,15 @@ const CodeLines = () => {
   );
 };
 
-// Matrix rain effect
-const MatrixEffect = () => {
-  const columns = 20;
-  const characters = Array.from({ length: columns }, () => ({
-    chars: Array.from({ length: Math.floor(Math.random() * 20) + 10 }, () =>
-      String.fromCharCode(Math.floor(Math.random() * 93) + 33)
-    ),
-    x: Math.random() * 100,
-    speed: Math.random() * 3 + 1,
-  }));
+// Client-side only wrapper component
+const ClientOnly: React.FC<ClientOnlyProps> = ({ children }) => {
+  const [isClient, setIsClient] = useState(false);
 
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {characters.map((column, colIdx) => (
-        <div
-          key={colIdx}
-          className="absolute text-primary-500 text-xs font-mono"
-          style={{
-            left: `${column.x}%`,
-            top: "-20px",
-            opacity: 0.15,
-            writingMode: "vertical-rl",
-          }}
-        >
-          {column.chars.map((char, charIdx) => (
-            <motion.span
-              key={charIdx}
-              animate={{
-                opacity: [0, 0.8, 0],
-                y: [-20, window.innerHeight],
-              }}
-              transition={{
-                duration: column.speed * 10,
-                delay: charIdx * 0.15,
-                repeat: Infinity,
-                repeatDelay: Math.random() * 5,
-              }}
-            >
-              {char}
-            </motion.span>
-          ))}
-        </div>
-      ))}
-    </div>
-  );
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  return isClient ? children : null;
 };
 
 const SkillsSection: React.FC = () => {
@@ -382,7 +403,11 @@ const SkillsSection: React.FC = () => {
         <ParticleBackground />
         <GradientOrbs />
         <CodeLines />
-        <MatrixEffect />
+
+        {/* Wrap MatrixEffect with ClientOnly to avoid window reference during SSR */}
+        <ClientOnly>
+          <MatrixEffect />
+        </ClientOnly>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
