@@ -1,4 +1,3 @@
-// components/CustomScrollbar.tsx
 "use client";
 
 import React, { useEffect, useState } from "react";
@@ -27,12 +26,14 @@ const CustomScrollbar = () => {
       {/* Background track */}
       <div className="absolute h-full w-full bg-neutral-900" />
 
-      {/* Progress line */}
+      {/* Progress line with gradient */}
       <div
-        className="absolute top-0 w-full bg-orange-500 origin-top"
+        className="absolute top-0 w-full origin-top"
         style={{
           height: `${scrollProgress}%`,
           transition: "height 50ms linear",
+          background: "linear-gradient(to bottom, #6938EF, #00C2FF, #00EDAD)",
+          boxShadow: "0 0 8px rgba(105, 56, 239, 0.5)",
         }}
       />
     </div>

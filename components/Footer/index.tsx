@@ -3,13 +3,17 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
   GitBranch,
+  Linkedin,
   Mail,
   ArrowUp,
   Phone,
   MapPin,
   Send,
   Heart,
+  InstagramIcon,
+  ExternalLinkIcon,
 } from "lucide-react";
+import Image from "next/image";
 
 interface FooterProps {
   name?: string;
@@ -19,10 +23,10 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({
-  name = "Alex Johnson",
-  email = "alex@example.com",
-  phone = "+1 (555) 123-4567",
-  location = "San Francisco, CA",
+  name = "Karan Randhawa",
+  email = "karandeeprandhawa27@gmail.com",
+  phone = "+91 9661637558",
+  location = "Jamshedpur, India",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +49,7 @@ const Footer: React.FC<FooterProps> = ({
   return (
     <footer
       ref={containerRef}
-      className="relative bg-black text-white overflow-hidden"
+      className="relative bg-black text-white overflow-hidden md:px-8"
     >
       {/* Fixed solid background to prevent white overlay */}
       <div className="absolute inset-0 bg-black z-0"></div>
@@ -91,7 +95,7 @@ const Footer: React.FC<FooterProps> = ({
                       boxShadow: "0 0 20px rgba(105, 56, 239, 0.5)",
                     }}
                   >
-                    <span className="text-white font-bold text-lg">AJ</span>
+                    <span className="text-white font-bold text-lg">KR</span>
                   </motion.div>
                 </div>
                 <div>
@@ -116,12 +120,12 @@ const Footer: React.FC<FooterProps> = ({
                     color: "#6938EF",
                   },
                   {
-                    icon: <GitBranch size={20} />,
+                    icon: <Linkedin size={20} />,
                     url: "https://linkedin.com",
                     color: "#00C2FF",
                   },
                   {
-                    icon: <GitBranch size={20} />,
+                    icon: <InstagramIcon size={20} />,
                     url: "https://instagram.com",
                     color: "#E1306C",
                   },
@@ -173,10 +177,38 @@ const Footer: React.FC<FooterProps> = ({
                       location
                     )}`,
                   },
+                  {
+                    icon: (
+                      <Image
+                        src={"/telegram.png"}
+                        alt="telegram"
+                        height={16}
+                        width={16}
+                      />
+                    ),
+                    text: "Telegram",
+                    href: `https://t.me/${phone.replace(/\D/g, "")}`,
+                    redirectIcon: <ExternalLinkIcon size={12} />,
+                  },
+                  {
+                    icon: (
+                      <Image
+                        src={"/whatsapp.png"}
+                        alt="whatsapp"
+                        height={16}
+                        width={16}
+                      />
+                    ),
+                    text: "Whatsapp",
+                    href: `https://wa.me/${phone.replace(/\D/g, "")}`,
+                    redirectIcon: <ExternalLinkIcon size={12} />,
+                  },
                 ].map((item, index) => (
                   <motion.a
                     key={index}
                     href={item.href}
+                    target={item.redirectIcon ? "_blank" : undefined}
+                    rel={item.redirectIcon ? "noopener noreferrer" : undefined}
                     className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -186,6 +218,11 @@ const Footer: React.FC<FooterProps> = ({
                       {item.icon}
                     </span>
                     <span>{item.text}</span>
+                    {item.redirectIcon && (
+                      <span className="text-gray-500 group-hover:text-white transition-colors">
+                        {item.redirectIcon}
+                      </span>
+                    )}
                   </motion.a>
                 ))}
               </div>
@@ -202,12 +239,11 @@ const Footer: React.FC<FooterProps> = ({
               <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
               <ul className="space-y-3">
                 {[
-                  { text: "About", href: "#about" },
-                  { text: "Services", href: "#services" },
-                  { text: "Portfolio", href: "#portfolio" },
-                  { text: "Experience", href: "#experience" },
-                  { text: "Testimonials", href: "#testimonials" },
-                  { text: "Contact", href: "#contact" },
+                  { text: "About", href: "/about" },
+                  { text: "Career", href: "/career" },
+                  { text: "Education", href: "/education" },
+                  { text: "Projects", href: "/projects" },
+                  { text: "Testimonials", href: "/testimonials" },
                 ].map((link, index) => (
                   <motion.li
                     key={index}
@@ -290,7 +326,7 @@ const Footer: React.FC<FooterProps> = ({
             <span className="hidden md:inline mx-2">|</span>
             <span className="block md:inline mt-1 md:mt-0">
               Made with <Heart size={12} className="inline text-red-500 mx-1" />{" "}
-              and React
+              and Next
             </span>
           </motion.p>
 

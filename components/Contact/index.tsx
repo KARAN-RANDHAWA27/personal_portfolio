@@ -48,8 +48,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
     offset: ["start end", "end start"],
   });
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [0.95, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [1, 1, 1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 1]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (containerRef.current) {
@@ -107,6 +107,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           opacity,
           scale,
         }}
+        initial={{ opacity: 1 }}
         onMouseMove={handleMouseMove}
       >
         {/* Unique visual elements - Glowing lines radiating from center */}

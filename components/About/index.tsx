@@ -17,7 +17,9 @@ import {
   Zap,
   Link,
   ExternalLink,
+  LinkIcon,
 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface Skill {
   name: string;
@@ -39,12 +41,13 @@ interface AboutMeProps {
 }
 
 const AboutMe: React.FC<AboutMeProps> = ({
-  name = "Alex Johnson",
-  title = "Full Stack Developer & AI Enthusiast",
-  bio = "Passionate developer with 6+ years of experience creating beautiful, functional applications. I specialize in React, TypeScript, and Node.js with a strong interest in AI and machine learning technologies.",
+  name = "Karan Randhawa",
+  title = "Full Stack Developer & Blockchain Enthusiast",
+  bio = "Passionate developer with 3+ years of experience creating beautiful, functional applications. I specialize in React, TypeScript, Node.js, Python and it's frameworks with a strong interest in Blockchain, AI and machine learning technologies.",
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
   const [isInView, setIsInView] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -119,15 +122,25 @@ const AboutMe: React.FC<AboutMeProps> = ({
     },
     {
       name: "AI & Machine Learning",
-      level: 70,
+      level: 55,
       color: "#FFB800",
       icon: <Star size={18} />,
+    },
+    {
+      name: "Blockchain Tech",
+      level: 35,
+      color: "#FF5733",
+      icon: <LinkIcon size={18} />,
     },
   ];
 
   // Social media links
   const socialLinks: SocialLink[] = [
-    { name: "GitHub", url: "https://github.com", icon: <Code size={16} /> },
+    {
+      name: "GitHub",
+      url: "https://github.com/KARAN-RANDHAWA27",
+      icon: <Code size={16} />,
+    },
     {
       name: "LinkedIn",
       url: "https://linkedin.com",
@@ -468,6 +481,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
                   className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium py-3 px-6 rounded-full flex items-center gap-2 shadow-lg shadow-primary-500/20"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => router.push("/projects")}
                 >
                   <span>View My Work</span>
                   <ExternalLink size={16} />
