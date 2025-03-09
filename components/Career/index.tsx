@@ -301,8 +301,10 @@ const CareerSection: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 inline-block relative">
-            <span className="relative z-10">Professional Journey</span>
-            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 rounded-full"></span>
+            <span className="relative z-10 bg-clip-text text-transparent bg-gradient-to-r from-primary-400 via-secondary-400 to-accent-400 inline-block">
+              Professional Journey
+            </span>
+            {/* <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 rounded-full"></span> */}
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto mt-4">
             Building digital experiences that transform ideas into reality

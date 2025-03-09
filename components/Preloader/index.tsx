@@ -26,7 +26,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
     // Moon and stars appear first
     const timer0 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, moonPhase: 1 })),
-      200
+      300
     );
 
     // Words appear sequence
@@ -41,27 +41,27 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
     );
     const timer2 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, creative: true })),
-      1300
+      900
     );
     const timer3 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, excellence: true })),
-      2000
+      1300
     );
 
     // Words disappear
     const timer4 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, wordsExit: true })),
-      2500
+      1800
     );
 
     // Box sequence
     const timer5 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, boxPhase: 1 })),
-      3000
+      2200
     ); // start growing
     const timer6 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, boxPhase: 2 })),
-      3300
+      2600
     ); // full width
     const timer7 = setTimeout(
       () =>
@@ -70,17 +70,17 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           showName: true,
           moonPhase: 3,
         })),
-      3800
+      3000
     ); // show name
     const timer8 = setTimeout(
       () => setAnimationState((prev) => ({ ...prev, boxPhase: 3 })),
-      5000
+      4500
     ); // start shrinking
 
     // Complete loading
     const completeTimer = setTimeout(() => {
       if (onLoadingComplete) onLoadingComplete();
-    }, 6000);
+    }, 5100);
 
     return () => {
       [

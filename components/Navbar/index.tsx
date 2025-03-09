@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <>
@@ -15,7 +18,12 @@ const Navbar = () => {
       >
         <div className="p-8">
           <div className="flex justify-between items-center mb-16">
-            <span className="text-2xl font-bold text-white">K.</span>
+            <span
+              className="text-2xl font-bold text-white cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              K.
+            </span>
             <button onClick={() => setIsMenuOpen(false)} className="text-white">
               <svg
                 width="24"
@@ -33,22 +41,52 @@ const Navbar = () => {
             </button>
           </div>
           <nav className="space-y-6">
-            <Link href="/" className="block text-orange-500 text-xl">
+            <Link
+              href="/"
+              className={`block ${
+                pathname === "/" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               Homepage
             </Link>
-            <Link href="/about" className="block text-white text-xl">
+            <Link
+              href="/about"
+              className={`block ${
+                pathname === "/about" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               About Me
             </Link>
-            <Link href="/career" className="block text-white text-xl">
+            <Link
+              href="/career"
+              className={`block ${
+                pathname === "/career" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               Career
             </Link>
-            <Link href="/education" className="block text-white text-xl">
+            <Link
+              href="/education"
+              className={`block ${
+                pathname === "/education" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               Education
             </Link>
-            <Link href="/projects" className="block text-white text-xl">
+            <Link
+              href="/projects"
+              className={`block ${
+                pathname === "/projects" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               Projects
             </Link>
-            <Link href="/testimonials" className="block text-white text-xl">
+            <Link
+              href="/testimonials"
+              className={`block ${
+                pathname === "/testimonials" ? "text-purple" : "text-white"
+              }   text-xl`}
+            >
               Testimonials
             </Link>
           </nav>
@@ -59,7 +97,12 @@ const Navbar = () => {
       <header className="fixed w-full top-0 z-40 bg-transparent lg:px-6">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
-            <span className="text-2xl font-bold text-white">K.</span>
+            <span
+              className="text-2xl font-bold text-white cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              K.
+            </span>
             <button onClick={() => setIsMenuOpen(true)} className="text-white">
               <Image
                 src="/menu_icon.svg"
