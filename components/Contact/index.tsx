@@ -308,7 +308,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
                         className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary-500/20 relative overflow-hidden"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        disabled={formState === "submitting"}
+                        // disabled={formState === "submitting"}
+                        disabled={true}
                       >
                         {formState === "idle" && (
                           <>
