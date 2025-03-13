@@ -83,7 +83,7 @@ const EducationSection: React.FC = () => {
       color: "#00EDAD",
       specialization: "Basic 10th Schooling",
       achievements: [
-        "Various Annual function winner",
+        "Various Compitition winner",
         "Created school level projects",
         "Participated in Intra School Competition",
       ],
