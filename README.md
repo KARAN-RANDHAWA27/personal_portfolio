@@ -11,4 +11,4 @@ I am a **Full Stack Developer** with 3+ years of experience, specializing in **W
 ### Contact:
 
 - **Email**: richrandhawa03@gmail.com
-- **GitHub**: [Your GitHub](https://github.com/KARAN-RANDHAWA27)
+- **GitHub**: [Karan Randhawa](https://github.com/KARAN-RANDHAWA27)
