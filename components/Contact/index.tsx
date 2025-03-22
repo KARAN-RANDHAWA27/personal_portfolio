@@ -450,14 +450,14 @@ const CircuitPattern: React.FC = () => {
 
 // Radiating lines animation
 const RadiatingLines: React.FC = () => {
-  const lines = 24; // Number of lines
+  const lines = 16; // Reduced from 24
   const angleStep = 360 / lines;
 
   return (
     <div className="w-full h-full absolute inset-0">
       {[...Array(lines)].map((_, index) => {
         const angle = index * angleStep;
-        const delay = index * (2 / lines);
+        const delay = index * (1.5 / lines); // Reduced delay
 
         return (
           <motion.div
@@ -467,14 +467,15 @@ const RadiatingLines: React.FC = () => {
               width: "100%",
               transformOrigin: "0 50%",
               rotate: `${angle}deg`,
+              willChange: "transform, opacity",
             }}
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{
               scaleX: [0, 1, 0],
-              opacity: [0, 0.3, 0],
+              opacity: [0, 0.2, 0], // Reduced opacity
             }}
             transition={{
-              duration: 6,
+              duration: 4, // Reduced from 6
               repeat: Infinity,
               delay: delay,
               ease: "easeInOut",
@@ -558,55 +559,22 @@ const ParticleClouds: React.FC = () => {
 // Digital planet illustration
 const PlanetIllustration: React.FC = () => {
   return (
-    <div className="p-8 flex items-center justify-center">
-      <div className="relative w-40 h-40">
-        {/* Main planet */}
-        <motion.div
-          className="absolute w-40 h-40 rounded-full bg-gradient-to-br from-indigo-900 to-purple-900 shadow-lg"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-        >
-          {/* Surface details */}
-          {[...Array(8)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-purple-700/40"
-              style={{
-                width: Math.random() * 20 + 10,
-                height: Math.random() * 20 + 10,
-                left: `${Math.random() * 80 + 10}%`,
-                top: `${Math.random() * 80 + 10}%`,
-                transformOrigin: "center",
-              }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Planet ring */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-16">
-          <motion.div
-            className="absolute inset-0 rounded-full border-8 border-t-0 border-indigo-500/30"
-            style={{ transform: "rotateX(75deg)" }}
-            animate={{ rotate: 360 }}
-            transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-          />
-        </div>
-
-        {/* Orbiting moon */}
+    <div className="relative w-full h-full">
+      <div className="absolute inset-0 flex items-center justify-center">
         <motion.div
           className="absolute top-1/2 left-1/2"
           animate={{ rotate: 360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          style={{ width: 0, height: 0 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }} // Slower rotation
+          style={{ width: 0, height: 0, willChange: "transform" }}
         >
           <motion.div
             className="absolute w-8 h-8 rounded-full bg-gray-300"
-            style={{ left: 90, top: -4 }}
+            style={{ left: 90, top: -4, willChange: "box-shadow" }}
             animate={{
-              boxShadow: ["0 0 5px #fff", "0 0 15px #fff", "0 0 5px #fff"],
+              boxShadow: ["0 0 5px #fff", "0 0 10px #fff", "0 0 5px #fff"], // Reduced glow
             }}
             transition={{
-              duration: 2,
+              duration: 3, // Slower pulse
               repeat: Infinity,
               repeatType: "reverse",
             }}
@@ -614,29 +582,35 @@ const PlanetIllustration: React.FC = () => {
         </motion.div>
 
         {/* Floating space debris */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: Math.random() * 2 + 1,
-              height: Math.random() * 2 + 1,
-              left: `${Math.random() * 200}%`,
-              top: `${Math.random() * 200}%`,
-              opacity: Math.random() * 0.7 + 0.3,
-            }}
-            animate={{
-              x: [0, Math.random() * 20 - 10],
-              y: [0, Math.random() * 20 - 10],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 3,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
-          />
-        ))}
+        {[...Array(10)].map(
+          (
+            _,
+            i // Reduced from 15
+          ) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-white"
+              style={{
+                width: Math.random() * 1.5 + 1, // Reduced size
+                height: Math.random() * 1.5 + 1,
+                left: `${Math.random() * 150}%`, // Reduced range
+                top: `${Math.random() * 150}%`,
+                opacity: Math.random() * 0.5 + 0.2, // Reduced opacity
+                willChange: "transform, opacity",
+              }}
+              animate={{
+                x: [0, Math.random() * 10 - 5], // Reduced movement
+                y: [0, Math.random() * 10 - 5],
+                opacity: [0.2, 0.5, 0.2], // Reduced opacity variation
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2, // Reduced duration
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            />
+          )
+        )}
       </div>
     </div>
   );

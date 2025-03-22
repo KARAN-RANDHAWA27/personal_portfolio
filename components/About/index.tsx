@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import React, { useRef, useState, useEffect } from "react";
 import {
@@ -288,7 +289,7 @@ const AboutMe: React.FC<AboutMeProps> = ({
                   <div className="relative rounded-full overflow-hidden aspect-square">
                     <div className="w-full h-full bg-gradient-to-br from-gray-900 to-gray-800 relative">
                       <div className="absolute inset-0 flex items-center justify-center text-7xl text-gray-700 font-bold">
-                        <User size={120} className="opacity-30" />
+                        <img src={"/karan.png"} alt="Karan" />
                       </div>
                     </div>
 
@@ -503,13 +504,13 @@ const AboutMe: React.FC<AboutMeProps> = ({
 
 // Star field effect matching hero
 const StarField: React.FC = () => {
-  const stars = Array.from({ length: 100 }, (_, index) => ({
+  const stars = Array.from({ length: 80 }, (_, index) => ({
     id: index,
-    size: Math.random() * 2 + 0.5,
+    size: Math.random() * 1.5 + 0.5,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    opacity: Math.random() * 0.5 + 0.2,
-    blinkDuration: Math.random() * 4 + 3,
+    opacity: Math.random() * 0.4 + 0.2,
+    blinkDuration: Math.random() * 3 + 2,
   }));
 
   return (
@@ -524,9 +525,10 @@ const StarField: React.FC = () => {
             left: `${star.x}%`,
             top: `${star.y}%`,
             opacity: star.opacity,
+            willChange: "opacity",
           }}
           animate={{
-            opacity: [star.opacity, star.opacity * 1.5, star.opacity],
+            opacity: [star.opacity, star.opacity * 1.3, star.opacity],
           }}
           transition={{
             duration: star.blinkDuration,
@@ -620,12 +622,12 @@ const ConstellationLines: React.FC = () => {
 
 // Animated particles component
 const ParticleEffect: React.FC = () => {
-  const particles = Array.from({ length: 20 }, (_, index) => ({
+  const particles = Array.from({ length: 15 }, (_, index) => ({
     id: index,
-    size: Math.random() * 3 + 1,
+    size: Math.random() * 2 + 1,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    duration: Math.random() * 20 + 10,
+    duration: Math.random() * 15 + 8,
   }));
 
   return (
@@ -639,10 +641,11 @@ const ParticleEffect: React.FC = () => {
             height: particle.size,
             left: `${particle.x}%`,
             top: `${particle.y}%`,
+            willChange: "transform, opacity",
           }}
           animate={{
-            y: [0, -100, 0],
-            opacity: [0, 0.3, 0],
+            y: [0, -50, 0],
+            opacity: [0, 0.2, 0],
           }}
           transition={{
             duration: particle.duration,

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, JSX } from "react";
+import React, { useState, useEffect, useRef, JSX, useMemo } from "react";
 import { motion } from "framer-motion";
 import {
   Briefcase,
@@ -43,98 +43,156 @@ const CareerSection: React.FC = () => {
   const [activeCard, setActiveCard] = useState<number>(0);
   const [isHovering, setIsHovering] = useState<boolean>(false);
   const [bgCircles, setBgCircles] = useState<AnimatedBgCircle[]>([]);
+  const [contentHeight, setContentHeight] = useState<number>(0);
   const animationRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const careerData: CareerItem[] = [
-    {
-      id: 0,
-      title: "Senior Full Stack Developer",
-      company: "TechNova Solutions",
-      period: "2021 - Present",
-      location: "San Francisco, CA",
-      color: "#6938EF", // primary-500
-      shadowColor: "rgba(105, 56, 239, 0.5)",
-      lightColor: "rgba(105, 56, 239, 0.15)",
-      iconBg: "#6938EF",
-      description:
-        "Leading development of enterprise cloud applications and mentoring junior developers. Architecting scalable solutions for Fortune 500 clients.",
-      highlights: [
-        "Led development of enterprise SaaS platform",
-        "Managed team of 6 developers across 3 time zones",
-        "Reduced infrastructure costs by 40%",
-        "Implemented CI/CD pipelines for streamlined deployments",
-      ],
-      technologies: [
-        "React",
-        "TypeScript",
-        "Node.js",
-        "GraphQL",
-        "AWS",
-        "MongoDB",
-        "Docker",
-      ],
-      icon: <Briefcase />,
-      projectUrl: "#project1",
-    },
-    {
-      id: 1,
-      title: "Full Stack Developer",
-      company: "Digital Frontier",
-      period: "2019 - 2021",
-      location: "Boston, MA",
-      color: "#00C2FF", // secondary-500
-      shadowColor: "rgba(0, 194, 255, 0.5)",
-      lightColor: "rgba(0, 194, 255, 0.15)",
-      iconBg: "#00C2FF",
-      description:
-        "Developed and maintained web applications for financial and healthcare clients, focusing on security and performance optimization.",
-      highlights: [
-        "Developed responsive web applications for finance sector",
-        "Built secure payment processing systems",
-        "Optimized database performance for high-traffic applications",
-        "Integrated third-party APIs and services",
-      ],
-      technologies: [
-        "Angular",
-        "JavaScript",
-        "Express",
-        "PostgreSQL",
-        "Azure",
-        "Redis",
-      ],
-      icon: <Code />,
-      projectUrl: "#project2",
-    },
-    {
-      id: 2,
-      title: "Front-end Developer",
-      company: "Creative Pulse",
-      period: "2017 - 2019",
-      location: "Austin, TX",
-      color: "#00EDAD", // accent-500
-      shadowColor: "rgba(0, 237, 173, 0.5)",
-      lightColor: "rgba(0, 237, 173, 0.15)",
-      iconBg: "#00EDAD",
-      description:
-        "Created interactive user interfaces and experiences for award-winning websites and digital campaigns for major brands.",
-      highlights: [
-        "Created interactive UIs for award-winning websites",
-        "Collaborated with designers to implement pixel-perfect designs",
-        "Built reusable component libraries",
-        "Improved web accessibility standards across projects",
-      ],
-      technologies: [
-        "JavaScript",
-        "Vue.js",
-        "SASS",
-        "Webpack",
-        "REST APIs",
-        "Figma",
-      ],
-      icon: <Target />,
-      projectUrl: "#project3",
-    },
-  ];
+  const careerData = useMemo<CareerItem[]>(
+    () => [
+      {
+        id: 0,
+        title: "Frontend Developer",
+        company: "BuidlerDao",
+        period: "Oct, 2024 - Present",
+        location: "Singapore",
+        color: "#6938EF",
+        shadowColor: "rgba(105, 56, 239, 0.5)",
+        lightColor: "rgba(105, 56, 239, 0.15)",
+        iconBg: "#6938EF",
+        description:
+          "Frontend software developer with experience working on 8 diverse projects. Proficient in multiple technologies, I specialize in creating intuitive and responsive user interfaces.",
+        highlights: [
+          "Developed and maintained frontend features for 8 diverse projects",
+          "Utilized multiple technologies to deliver responsive, user-centric interfaces",
+          "Collaborated with cross-functional teams to ensure seamless product delivery",
+          "Optimized performance and user experience across various platforms",
+        ],
+        technologies: ["React", "TypeScript", "Node.js", "Next", "CI/CD", "JS"],
+        icon: <Briefcase />,
+        projectUrl: "#",
+      },
+      {
+        id: 1,
+        title: "Pandora Web Studios",
+        company: "Full Stack Developer",
+        period: "April, 2024 - July, 2024",
+        location: "Kolkata, India",
+        color: "#00C2FF",
+        shadowColor: "rgba(0, 194, 255, 0.5)",
+        lightColor: "rgba(0, 194, 255, 0.15)",
+        iconBg: "#00C2FF",
+        description:
+          "Developed E-Commerce, service-based applications, and SaaS products, including CMS and E-Mail Marketing platforms. Implemented ML-based recommendation systems and optimized solutions using Next.js, Node.js, WordPress, and Django. Leveraged React Native to create cross-platform mobile applications.",
+        highlights: [
+          "Developed E-Commerce and service-based applications for diverse industries",
+          "Built SaaS products, including CMS and E-Mail Marketing platforms",
+          "Implemented ML-based recommendation systems to enhance user personalization",
+          "Optimized web applications using Next.js, Node.js, WordPress, and Django",
+          "Developed cross-platform mobile applications using React Native",
+        ],
+        technologies: [
+          "Django",
+          "JavaScript",
+          "Python",
+          "PostgreSQL",
+          "My SQL",
+          "Redis",
+        ],
+        icon: <Code />,
+        projectUrl: "#",
+      },
+      {
+        id: 2,
+        title: "Full Stack Developer",
+        company: "Web Idea Solutions LLP",
+        period: "April, 2024 - July, 2024",
+        location: "Kolkata, India",
+        color: "#FF9800",
+        shadowColor: "rgba(255, 140, 0, 0.6)",
+        lightColor: "rgba(255, 165, 0, 0.1)",
+        iconBg: "#00C2FF",
+        description:
+          "Developed and maintained web applications for educational, and travel sectors, focusing on security, performance optimization, and user experience.",
+        highlights: [
+          "Developed and maintained web applications for educational, and travel sectors",
+          "Focused on security and performance optimization for sensitive client data",
+          "Created user-friendly interfaces, ensuring seamless experiences across platforms",
+          "Integrated third-party APIs and services to enhance functionality",
+        ],
+        technologies: [
+          "Django",
+          "JavaScript",
+          "Python",
+          "PostgreSQL",
+          "My SQL",
+          "Redis",
+        ],
+        icon: <Code />,
+        projectUrl: "#",
+      },
+      {
+        id: 3,
+        title: "Full Stack Developer",
+        company: "Raneso",
+        period: "Feb, 2023 - March, 2024",
+        location: "Ranchi, India",
+        color: "#00EDAD",
+        shadowColor: "rgba(0, 237, 173, 0.5)",
+        lightColor: "rgba(0, 237, 173, 0.15)",
+        iconBg: "#00EDAD",
+        description:
+          "Developed dynamic web applications by implementing Django authentication, RESTful APIs, and MySQL database management with custom SQL queries. Created WebSocket chat functionality, email notifications, and CSV data processing for enhanced user interaction and data handling.",
+        highlights: [
+          "Developed dynamic web applications using Django and custom SQL queries",
+          "Implemented Django authentication and RESTful APIs for seamless user management",
+          "Built WebSocket chat functionality for real-time communication",
+          "Created email notifications to enhance user engagement",
+          "Handled CSV data processing to manage large datasets efficiently",
+        ],
+        technologies: [
+          "Django",
+          "JavaScript",
+          "Python",
+          "PostgreSQL",
+          "My SQL",
+          "Web Socket",
+        ],
+        icon: <Target />,
+        projectUrl: "#",
+      },
+      {
+        id: 4,
+        title: "Software Developer",
+        company: "DND Furnaces",
+        period: "July, 2020 - Aug, 2021",
+        location: "Ranchi, India",
+        color: "#F2416B",
+        shadowColor: "rgba(242, 65, 107, 0.5)",
+        lightColor: "rgba(242, 65, 107, 0.15)",
+        iconBg: "#F2416B",
+        description:
+          "Developed dynamic web applications by implementing Django authentication, RESTful APIs, and MySQL database management with custom SQL queries. Created WebSocket chat functionality, email notifications, and CSV data processing for enhanced user interaction and data handling.",
+        highlights: [
+          "Developed dynamic web applications using Django and custom SQL queries",
+          "Implemented Django authentication and RESTful APIs for seamless user management",
+          "Built WebSocket chat functionality for real-time communication",
+          "Created email notifications to enhance user engagement",
+          "Handled CSV data processing to manage large datasets efficiently",
+        ],
+        technologies: [
+          "Django",
+          "JavaScript",
+          "Python",
+          "PostgreSQL",
+          "My SQL",
+          "Web Socket",
+        ],
+        icon: <Target />,
+        projectUrl: "#",
+      },
+    ],
+    []
+  );
 
   // Initialize background animated circles
   useEffect(() => {
@@ -163,6 +221,64 @@ const CareerSection: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [isHovering, careerData.length]);
+
+  // Calculate the tallest content height and set it
+  useEffect(() => {
+    // Set initial min-height to avoid initial layout jump
+    setContentHeight(600); // Default minimum height
+
+    const calculateMaxHeight = () => {
+      // Find tallest content
+      let maxHeight = 0;
+      careerData.forEach((_, index) => {
+        // Create a dummy div with the content to measure its height
+        const tempDiv = document.createElement("div");
+        tempDiv.style.position = "absolute";
+        tempDiv.style.visibility = "hidden";
+        tempDiv.style.width = contentRef.current
+          ? `${contentRef.current.clientWidth}px`
+          : "100%";
+
+        // Clone the content for this career item
+        const content = document.createElement("div");
+        content.innerHTML = `
+          <h2>${careerData[index].title}</h2>
+          <h3>${careerData[index].company}</h3>
+          <p>${careerData[index].description}</p>
+          <div>
+            ${careerData[index].highlights
+              .map((h) => `<div>${h}</div>`)
+              .join("")}
+          </div>
+          <div>
+            ${careerData[index].technologies
+              .map((t) => `<span>${t}</span>`)
+              .join("")}
+          </div>
+        `;
+
+        tempDiv.appendChild(content);
+        document.body.appendChild(tempDiv);
+
+        // Measure and update max height if needed
+        const height = tempDiv.clientHeight;
+        if (height > maxHeight) maxHeight = height;
+
+        // Clean up
+        document.body.removeChild(tempDiv);
+      });
+
+      // Add some padding to the max height
+      return Math.max(maxHeight + 50, 600); // Ensure minimum of 600px
+    };
+
+    // Update the content height after a short delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      setContentHeight(calculateMaxHeight());
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [careerData]);
 
   // Parallax effect on mouse move for background elements
   useEffect(() => {
@@ -389,8 +505,12 @@ const CareerSection: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Content Panel */}
-          <div className="lg:col-span-8">
+          {/* Content Panel with fixed height */}
+          <div
+            className="lg:col-span-8"
+            ref={contentRef}
+            style={{ height: `${contentHeight}px` }}
+          >
             <AnimatedCareerCard data={careerData[activeCard]} />
           </div>
         </div>
@@ -428,6 +548,60 @@ const CareerSection: React.FC = () => {
             transform: rotate(360deg);
           }
         }
+
+        /* Custom Scrollbar Styles */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior: contain;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+          border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          border: 2px solid transparent;
+          background-clip: padding-box;
+          transition: background-color 0.2s ease;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+          border: 2px solid transparent;
+          background-clip: padding-box;
+        }
+
+        /* Smooth scrolling for the entire card */
+        .custom-scrollbar {
+          scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar when not scrolling */
+        .custom-scrollbar:not(:hover)::-webkit-scrollbar-thumb {
+          background: transparent;
+        }
+
+        /* Show scrollbar on hover */
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Optimize for touch devices */
+        @media (hover: none) {
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+          }
+        }
       `}</style>
     </div>
   );
@@ -458,8 +632,8 @@ const AnimatedCareerCard: React.FC<AnimatedCareerCardProps> = ({ data }) => {
       ></div>
 
       {/* Card Content */}
-      <div className="relative z-10 backdrop-blur-sm bg-dark-800/50 p-8 rounded-2xl border border-dark-700 h-full">
-        <div className="flex flex-col h-full">
+      <div className="relative z-10 backdrop-blur-sm bg-dark-800/50 p-8 rounded-2xl border border-dark-700 h-full overflow-y-auto custom-scrollbar">
+        <div className="space-y-6">
           <div className="mb-6">
             <div className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-white/10 backdrop-blur-sm mb-3">
               {data.period}

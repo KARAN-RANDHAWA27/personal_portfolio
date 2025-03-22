@@ -583,11 +583,11 @@ const EnhancedParticleEffect: React.FC = () => {
 // Floating colorful orbs
 const FloatingOrbs: React.FC = () => {
   const orbs = [
-    { x: "15%", y: "20%", size: 180, color: "rgba(105, 56, 239, 0.1)" },
-    { x: "80%", y: "65%", size: 220, color: "rgba(0, 194, 255, 0.08)" },
-    { x: "45%", y: "30%", size: 200, color: "rgba(0, 237, 173, 0.07)" },
-    { x: "75%", y: "15%", size: 150, color: "rgba(255, 184, 0, 0.06)" },
-    { x: "30%", y: "80%", size: 170, color: "rgba(255, 107, 107, 0.05)" },
+    { x: "15%", y: "20%", size: 150, color: "rgba(105, 56, 239, 0.1)" },
+    { x: "80%", y: "65%", size: 180, color: "rgba(0, 194, 255, 0.08)" },
+    { x: "45%", y: "30%", size: 160, color: "rgba(0, 237, 173, 0.07)" },
+    { x: "75%", y: "15%", size: 120, color: "rgba(255, 184, 0, 0.06)" },
+    { x: "30%", y: "80%", size: 140, color: "rgba(255, 107, 107, 0.05)" },
   ];
 
   return (
@@ -602,14 +602,15 @@ const FloatingOrbs: React.FC = () => {
             left: orb.x,
             top: orb.y,
             backgroundColor: orb.color,
+            willChange: "transform",
           }}
           animate={{
-            x: [0, 20, 0, -20, 0],
-            y: [0, -20, 0, 20, 0],
-            scale: [1, 1.1, 1, 0.9, 1],
+            x: [0, 15, 0, -15, 0],
+            y: [0, -15, 0, 15, 0],
+            scale: [1, 1.05, 1, 0.95, 1],
           }}
           transition={{
-            duration: 15 + index * 5,
+            duration: 20 + index * 3,
             repeat: Infinity,
             ease: "easeInOut",
           }}

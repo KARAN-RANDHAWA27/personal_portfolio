@@ -16,113 +16,94 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
   });
 
   const moonRef = useRef<HTMLDivElement>(null);
+  const starsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Create stars initially
-    if (moonRef.current) {
-      createStars(moonRef.current);
+    // Create stars with reduced count and optimized DOM operations
+    if (moonRef.current && !starsRef.current) {
+      const starCount = 150; // Reduced from 200
+      const fragment = document.createDocumentFragment();
+      const starsContainer = document.createElement("div");
+      starsContainer.className = "absolute inset-0";
+      starsContainer.style.willChange = "transform";
+
+      for (let i = 0; i < starCount; i++) {
+        const star = document.createElement("div");
+        const size = Math.random() * 1.5; // Reduced from 2
+
+        star.className = "absolute rounded-full";
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.backgroundColor = i % 20 === 0 ? "#E0E0FF" : "#FFFFFF";
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        star.style.opacity = `${Math.random() * 0.6 + 0.2}`; // Reduced opacity range
+        star.style.animation = `twinkle ${
+          Math.random() * 4 + 3
+        }s infinite ease-in-out`;
+        star.style.willChange = "opacity";
+
+        fragment.appendChild(star);
+      }
+
+      starsContainer.appendChild(fragment);
+      moonRef.current.appendChild(starsContainer);
+      starsRef.current = starsContainer;
     }
 
-    // Moon and stars appear first
-    const timer0 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, moonPhase: 1 })),
-      300
-    );
+    // Optimized animation sequence
+    const timers = [
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, moonPhase: 1 })),
+        300
+      ),
+      setTimeout(
+        () =>
+          setAnimationState((prev) => ({
+            ...prev,
+            pioneering: true,
+            moonPhase: 2,
+          })),
+        500
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, creative: true })),
+        900
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, excellence: true })),
+        1300
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, wordsExit: true })),
+        1800
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, boxPhase: 1 })),
+        2200
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, boxPhase: 2 })),
+        2600
+      ),
+      setTimeout(
+        () =>
+          setAnimationState((prev) => ({
+            ...prev,
+            showName: true,
+            moonPhase: 3,
+          })),
+        3000
+      ),
+      setTimeout(
+        () => setAnimationState((prev) => ({ ...prev, boxPhase: 3 })),
+        4500
+      ),
+      setTimeout(() => onLoadingComplete?.(), 5100),
+    ];
 
-    // Words appear sequence
-    const timer1 = setTimeout(
-      () =>
-        setAnimationState((prev) => ({
-          ...prev,
-          pioneering: true,
-          moonPhase: 2,
-        })),
-      500
-    );
-    const timer2 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, creative: true })),
-      900
-    );
-    const timer3 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, excellence: true })),
-      1300
-    );
-
-    // Words disappear
-    const timer4 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, wordsExit: true })),
-      1800
-    );
-
-    // Box sequence
-    const timer5 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, boxPhase: 1 })),
-      2200
-    ); // start growing
-    const timer6 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, boxPhase: 2 })),
-      2600
-    ); // full width
-    const timer7 = setTimeout(
-      () =>
-        setAnimationState((prev) => ({
-          ...prev,
-          showName: true,
-          moonPhase: 3,
-        })),
-      3000
-    ); // show name
-    const timer8 = setTimeout(
-      () => setAnimationState((prev) => ({ ...prev, boxPhase: 3 })),
-      4500
-    ); // start shrinking
-
-    // Complete loading
-    const completeTimer = setTimeout(() => {
-      if (onLoadingComplete) onLoadingComplete();
-    }, 5100);
-
-    return () => {
-      [
-        timer0,
-        timer1,
-        timer2,
-        timer3,
-        timer4,
-        timer5,
-        timer6,
-        timer7,
-        timer8,
-        completeTimer,
-      ].forEach(clearTimeout);
-    };
+    return () => timers.forEach(clearTimeout);
   }, [onLoadingComplete]);
-
-  // Function to create stars
-  const createStars = (container: HTMLDivElement): void => {
-    const starCount = 200;
-    const fragment = document.createDocumentFragment();
-
-    for (let i = 0; i < starCount; i++) {
-      const star = document.createElement("div");
-      const size = Math.random() * 2;
-
-      star.className = "absolute rounded-full";
-      star.style.width = `${size}px`;
-      star.style.height = `${size}px`;
-      star.style.backgroundColor = i % 20 === 0 ? "#E0E0FF" : "#FFFFFF";
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.opacity = `${Math.random() * 0.8 + 0.2}`;
-      star.style.animation = `twinkle ${
-        Math.random() * 5 + 3
-      }s infinite ease-in-out`;
-
-      fragment.appendChild(star);
-    }
-
-    container.appendChild(fragment);
-  };
 
   const getBoxStyles = () => {
     switch (animationState.boxPhase) {
@@ -141,11 +122,9 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
 
   return (
     <div className="fixed inset-0 bg-black flex items-center justify-center overflow-hidden">
-      {/* Moon Background */}
       <div ref={moonRef} className="absolute inset-0 overflow-hidden">
-        {/* Stars are added via JavaScript */}
         <div
-          className={`absolute w-full h-full transition-all duration-1500 ease-out transform ${
+          className={`absolute w-full h-full transition-all duration-1500 ease-out transform will-change-opacity ${
             animationState.moonPhase > 0 ? "opacity-100" : "opacity-0"
           }`}
           style={{
@@ -157,7 +136,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
 
       <div
         className={`absolute text-white text-4xl md:text-6xl flex flex-wrap justify-center items-center gap-x-4
-        transition-all duration-700 transform z-10
+        transition-all duration-700 transform z-10 will-change-transform,opacity
         ${
           animationState.wordsExit
             ? "opacity-0 -translate-y-full"
@@ -165,7 +144,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
         }`}
       >
         <span
-          className={`transition-all duration-700 transform
+          className={`transition-all duration-700 transform will-change-transform,opacity
             ${
               animationState.pioneering
                 ? "opacity-100 translate-y-0"
@@ -175,7 +154,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           Visualize
         </span>
         <span
-          className={`font-bold transition-all duration-700 transform text-purple
+          className={`font-bold transition-all duration-700 transform text-purple will-change-transform,opacity
             ${
               animationState.creative
                 ? "opacity-100 translate-y-0"
@@ -185,7 +164,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           Design
         </span>
         <span
-          className={`transition-all duration-700 transform
+          className={`transition-all duration-700 transform will-change-transform,opacity
             ${
               animationState.excellence
                 ? "opacity-100 translate-y-0"
@@ -198,25 +177,23 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
 
       <div className="absolute w-64 h-16 flex items-center justify-center z-20">
         <div
-          className={`absolute inset-0 transition-all duration-700 ease-out transform origin-left ${getBoxStyles()}`}
+          className={`absolute inset-0 transition-all duration-700 ease-out transform origin-left will-change-transform,opacity ${getBoxStyles()}`}
         >
           <div className="h-full w-full rounded backdrop-blur-sm bg-dark-800 border border-purple/30">
-            {/* Subtle gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-primary-900/40 to-secondary-900/40 rounded"></div>
-
-            {/* Glowing accent */}
             <div
               className="absolute inset-0 rounded opacity-20"
               style={{
                 boxShadow: "inset 0 0 15px #a972ff, 0 0 5px #43B9B9",
                 animation: "pulse 3s infinite ease-in-out",
+                willChange: "opacity",
               }}
             ></div>
           </div>
         </div>
 
         <span
-          className={`z-30 text-2xl md:text-3xl font-medium whitespace-nowrap transition-all duration-500 transform
+          className={`z-30 text-2xl md:text-3xl font-medium whitespace-nowrap transition-all duration-500 transform will-change-transform,opacity
             ${
               animationState.showName
                 ? "opacity-100 scale-100"
@@ -246,15 +223,6 @@ const Preloader: React.FC<PreloaderProps> = ({ onLoadingComplete }) => {
           }
           50% {
             opacity: 1;
-          }
-        }
-
-        @keyframes slide {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
           }
         }
       `}</style>
