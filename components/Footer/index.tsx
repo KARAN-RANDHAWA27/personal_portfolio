@@ -24,7 +24,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({
   name = "Karan Randhawa",
-  email = "karandeeprandhawa27@gmail.com",
+  email = "richrandhawa03@gmail.com",
   phone = "+91 9661637558",
   location = "Jamshedpur, India",
 }) => {

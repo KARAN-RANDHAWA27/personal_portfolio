@@ -14,8 +14,6 @@ import {
   MessageSquare,
   Phone,
   Zap,
-  CheckCircle,
-  Loader,
   Sparkles,
 } from "lucide-react";
 
@@ -23,6 +21,110 @@ interface ContactFormProps {
   title?: string;
   subtitle?: string;
 }
+
+const ContactOptionsPopup: React.FC<{
+  onClose: () => void;
+  name: string;
+  message: string;
+}> = ({ onClose, name, message }) => {
+  const handleContact = (platform: string) => {
+    let url = "";
+    const phoneNumber = "919661637558"; // Your phone number without any special characters
+    const encodedMessage = encodeURIComponent(message);
+
+    switch (platform) {
+      case "telegram":
+        url = `https://t.me/${phoneNumber}?text=${encodedMessage}`;
+        break;
+      case "whatsapp":
+        url = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        break;
+      case "email":
+        url = `mailto:richrandhawa03@gmail.com?subject=Message from ${name}&body=${encodedMessage}`;
+        break;
+    }
+
+    if (url) {
+      window.open(url, "_blank");
+      onClose();
+    }
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+    >
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        className="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 relative overflow-hidden border border-gray-800"
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
+        <h3 className="text-2xl font-bold text-white mb-6">
+          Choose how to send your message
+        </h3>
+
+        <div className="space-y-4">
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleContact("telegram")}
+            className="w-full bg-gradient-to-r from-[#0088cc] to-[#00a2ff] text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.11.02-1.93 1.23-5.46 3.62-.52.36-.99.53-1.41.52-.46-.01-1.35-.26-2.01-.48-.81-.27-1.45-.42-1.4-.89.03-.25.37-.51 1.03-.78 4.04-1.76 6.74-2.92 8.09-3.48 3.85-1.6 4.64-1.88 5.17-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.14-.02.3-.03.42z" />
+            </svg>
+            Send via Telegram
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleContact("whatsapp")}
+            className="w-full bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.287.129.332.202.045.073.045.419-.1.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 1.856.001 3.598.723 4.907 2.034 1.31 1.311 2.031 3.054 2.03 4.908-.001 3.825-3.113 6.938-6.937 6.938z" />
+            </svg>
+            Send via WhatsApp
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            onClick={() => handleContact("email")}
+            className="w-full bg-gradient-to-r from-[#EA4335] to-[#FF6B6B] text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2"
+          >
+            <Mail className="w-5 h-5" />
+            Send via Email
+          </motion.button>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
 
 const ContactForm: React.FC<ContactFormProps> = ({
   title = "Let's Connect",
@@ -35,13 +137,9 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   // Form state
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [formState, setFormState] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
   const [activeField, setActiveField] = useState<string | null>(null);
+  const [showContactOptions, setShowContactOptions] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -64,35 +162,22 @@ const ContactForm: React.FC<ContactFormProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name || !email || !message) {
+    if (!name || !message) {
       return;
     }
 
-    setFormState("submitting");
-
-    // Simulate API call with delay
-    setTimeout(() => {
-      setFormState("success");
-      // Reset form after successful submission (with a delay for the animation)
-      setTimeout(() => {
-        setName("");
-        setEmail("");
-        setPhone("");
-        setMessage("");
-        setFormState("idle");
-      }, 3000);
-    }, 2000);
+    setShowContactOptions(true);
   };
 
   // Auto-focus for form reset
   useEffect(() => {
-    if (formState === "idle" && !name && !email && !phone && !message) {
+    if (!name && !message) {
       const firstInput = formRef.current?.querySelector("input");
       if (firstInput) {
         firstInput.focus();
       }
     }
-  }, [formState, name, email, phone, message]);
+  }, [name, message]);
 
   return (
     <div className="relative">
@@ -164,8 +249,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 <ContactCard
                   icon={<Mail size={24} />}
                   title="Email Me"
-                  content="hello@example.com"
-                  link="mailto:hello@example.com"
+                  content="richrandhawa03@gmail.com"
+                  link="mailto:richrandhawa03@gmail.com"
                   color="#6938EF"
                   delay={0.2}
                 />
@@ -174,8 +259,8 @@ const ContactForm: React.FC<ContactFormProps> = ({
                 <ContactCard
                   icon={<Phone size={24} />}
                   title="Call Me"
-                  content="+1 (555) 123-4567"
-                  link="tel:+15551234567"
+                  content="+919661637558"
+                  link="tel:+919661637558"
                   color="#00C2FF"
                   delay={0.3}
                 />
@@ -213,55 +298,23 @@ const ContactForm: React.FC<ContactFormProps> = ({
                   {/* Animated border gradient */}
                   <AnimatedBorder />
 
-                  {/* Form success overlay */}
-                  <AnimatePresence>
-                    {formState === "success" && <SuccessMessage />}
-                  </AnimatePresence>
-
                   <div className="p-8 md:p-10 relative z-10 flex-grow flex flex-col">
                     <form
                       ref={formRef}
                       onSubmit={handleSubmit}
                       className="flex flex-col h-full"
                     >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                      <div className="mb-6">
                         <FormField
                           label="Your Name"
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="John Doe"
+                          placeholder="Elon Musk"
                           required
                           icon={<User size={16} />}
                           isActive={activeField === "name"}
                           onFocus={() => setActiveField("name")}
-                          onBlur={() => setActiveField(null)}
-                        />
-
-                        <FormField
-                          label="Your Email"
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="john@example.com"
-                          required
-                          icon={<Mail size={16} />}
-                          isActive={activeField === "email"}
-                          onFocus={() => setActiveField("email")}
-                          onBlur={() => setActiveField(null)}
-                        />
-                      </div>
-
-                      <div className="mb-6">
-                        <FormField
-                          label="Phone (Optional)"
-                          type="tel"
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="+1 (555) 123-4567"
-                          icon={<Phone size={16} />}
-                          isActive={activeField === "phone"}
-                          onFocus={() => setActiveField("phone")}
                           onBlur={() => setActiveField(null)}
                         />
                       </div>
@@ -308,46 +361,24 @@ const ContactForm: React.FC<ContactFormProps> = ({
                         className="w-full bg-gradient-to-r from-primary-500 to-secondary-500 text-white font-medium py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg shadow-primary-500/20 relative overflow-hidden"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        // disabled={formState === "submitting"}
-                        disabled={true}
                       >
-                        {formState === "idle" && (
-                          <>
-                            <Send size={16} />
-                            <span>Send Message</span>
+                        <Send size={16} />
+                        <span>Send Message</span>
 
-                            {/* Sparkle effect on hover */}
-                            <motion.div
-                              className="absolute inset-0 -z-10"
-                              initial={false}
-                              whileHover={{
-                                background: [
-                                  "linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)",
-                                  "linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)",
-                                  "linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)",
-                                ],
-                                x: ["0%", "150%", "0%"],
-                              }}
-                              transition={{ duration: 1.5, repeat: Infinity }}
-                            />
-                          </>
-                        )}
-
-                        {formState === "submitting" && (
-                          <>
-                            <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{
-                                duration: 1,
-                                repeat: Infinity,
-                                ease: "linear",
-                              }}
-                            >
-                              <Loader size={16} />
-                            </motion.div>
-                            <span>Sending...</span>
-                          </>
-                        )}
+                        {/* Sparkle effect on hover */}
+                        <motion.div
+                          className="absolute inset-0 -z-10"
+                          initial={false}
+                          whileHover={{
+                            background: [
+                              "linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)",
+                              "linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent)",
+                              "linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent)",
+                            ],
+                            x: ["0%", "150%", "0%"],
+                          }}
+                          transition={{ duration: 1.5, repeat: Infinity }}
+                        />
                       </motion.button>
                     </form>
                   </div>
@@ -360,6 +391,17 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
       {/* Gradient to next section transition */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10"></div>
+
+      {/* Add the popup */}
+      <AnimatePresence>
+        {showContactOptions && (
+          <ContactOptionsPopup
+            onClose={() => setShowContactOptions(false)}
+            name={name}
+            message={message}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -450,14 +492,14 @@ const CircuitPattern: React.FC = () => {
 
 // Radiating lines animation
 const RadiatingLines: React.FC = () => {
-  const lines = 16; // Reduced from 24
+  const lines = 24; // Number of lines
   const angleStep = 360 / lines;
 
   return (
     <div className="w-full h-full absolute inset-0">
       {[...Array(lines)].map((_, index) => {
         const angle = index * angleStep;
-        const delay = index * (1.5 / lines); // Reduced delay
+        const delay = index * (2 / lines);
 
         return (
           <motion.div
@@ -467,15 +509,14 @@ const RadiatingLines: React.FC = () => {
               width: "100%",
               transformOrigin: "0 50%",
               rotate: `${angle}deg`,
-              willChange: "transform, opacity",
             }}
             initial={{ scaleX: 0, opacity: 0 }}
             animate={{
               scaleX: [0, 1, 0],
-              opacity: [0, 0.2, 0], // Reduced opacity
+              opacity: [0, 0.3, 0],
             }}
             transition={{
-              duration: 4, // Reduced from 6
+              duration: 6,
               repeat: Infinity,
               delay: delay,
               ease: "easeInOut",
@@ -559,22 +600,55 @@ const ParticleClouds: React.FC = () => {
 // Digital planet illustration
 const PlanetIllustration: React.FC = () => {
   return (
-    <div className="relative w-full h-full">
-      <div className="absolute inset-0 flex items-center justify-center">
+    <div className="p-8 flex items-center justify-center">
+      <div className="relative w-40 h-40">
+        {/* Main planet */}
+        <motion.div
+          className="absolute w-40 h-40 rounded-full bg-gradient-to-br from-indigo-900 to-purple-900 shadow-lg"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+        >
+          {/* Surface details */}
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-purple-700/40"
+              style={{
+                width: Math.random() * 20 + 10,
+                height: Math.random() * 20 + 10,
+                left: `${Math.random() * 80 + 10}%`,
+                top: `${Math.random() * 80 + 10}%`,
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </motion.div>
+
+        {/* Planet ring */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-16">
+          <motion.div
+            className="absolute inset-0 rounded-full border-8 border-t-0 border-indigo-500/30"
+            style={{ transform: "rotateX(75deg)" }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+          />
+        </div>
+
+        {/* Orbiting moon */}
         <motion.div
           className="absolute top-1/2 left-1/2"
           animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }} // Slower rotation
-          style={{ width: 0, height: 0, willChange: "transform" }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          style={{ width: 0, height: 0 }}
         >
           <motion.div
             className="absolute w-8 h-8 rounded-full bg-gray-300"
-            style={{ left: 90, top: -4, willChange: "box-shadow" }}
+            style={{ left: 90, top: -4 }}
             animate={{
-              boxShadow: ["0 0 5px #fff", "0 0 10px #fff", "0 0 5px #fff"], // Reduced glow
+              boxShadow: ["0 0 5px #fff", "0 0 15px #fff", "0 0 5px #fff"],
             }}
             transition={{
-              duration: 3, // Slower pulse
+              duration: 2,
               repeat: Infinity,
               repeatType: "reverse",
             }}
@@ -582,35 +656,29 @@ const PlanetIllustration: React.FC = () => {
         </motion.div>
 
         {/* Floating space debris */}
-        {[...Array(10)].map(
-          (
-            _,
-            i // Reduced from 15
-          ) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-full bg-white"
-              style={{
-                width: Math.random() * 1.5 + 1, // Reduced size
-                height: Math.random() * 1.5 + 1,
-                left: `${Math.random() * 150}%`, // Reduced range
-                top: `${Math.random() * 150}%`,
-                opacity: Math.random() * 0.5 + 0.2, // Reduced opacity
-                willChange: "transform, opacity",
-              }}
-              animate={{
-                x: [0, Math.random() * 10 - 5], // Reduced movement
-                y: [0, Math.random() * 10 - 5],
-                opacity: [0.2, 0.5, 0.2], // Reduced opacity variation
-              }}
-              transition={{
-                duration: 3 + Math.random() * 2, // Reduced duration
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
-          )
-        )}
+        {[...Array(15)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: Math.random() * 2 + 1,
+              height: Math.random() * 2 + 1,
+              left: `${Math.random() * 200}%`,
+              top: `${Math.random() * 200}%`,
+              opacity: Math.random() * 0.7 + 0.3,
+            }}
+            animate={{
+              x: [0, Math.random() * 20 - 10],
+              y: [0, Math.random() * 20 - 10],
+              opacity: [0.3, 0.7, 0.3],
+            }}
+            transition={{
+              duration: 2 + Math.random() * 3,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
       </div>
     </div>
   );
@@ -747,75 +815,6 @@ const ContactCard: React.FC<ContactCardProps> = ({
         </div>
       </div>
     </motion.a>
-  );
-};
-
-// Success message overlay component
-const SuccessMessage: React.FC = () => {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="absolute inset-0 z-20 bg-gray-900/90 backdrop-blur-sm flex flex-col items-center justify-center p-8"
-    >
-      <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center text-white"
-      >
-        <CheckCircle size={32} />
-      </motion.div>
-
-      <motion.h3
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="text-2xl font-bold text-white mb-2"
-      >
-        Message Sent!
-      </motion.h3>
-
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="text-gray-300 text-center max-w-md"
-      >
-        Thanks for reaching out! I&apos;ll get back to you as soon as possible.
-      </motion.p>
-
-      {/* Celebration particles */}
-      <motion.div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              width: Math.random() * 10 + 5,
-              height: Math.random() * 10 + 5,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              backgroundColor:
-                i % 3 === 0 ? "#6938EF" : i % 3 === 1 ? "#00C2FF" : "#00EDAD",
-            }}
-            initial={{ scale: 0 }}
-            animate={{
-              scale: [0, 1, 0],
-              y: [0, -100 - Math.random() * 100],
-              x: [0, (Math.random() - 0.5) * 100],
-              rotate: [0, Math.random() * 360],
-            }}
-            transition={{
-              duration: 1 + Math.random() * 2,
-              delay: Math.random() * 0.5,
-              ease: "easeOut",
-            }}
-          />
-        ))}
-      </motion.div>
-    </motion.div>
   );
 };
 
