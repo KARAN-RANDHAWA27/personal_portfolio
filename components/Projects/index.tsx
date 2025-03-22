@@ -138,6 +138,11 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Explore some of my recent work and creative endeavors
+              <br />
+              <p className="text-xs">
+                Due to policy restrictions, some project details and images may
+                be unavailable.
+              </p>
             </p>
           </motion.div>
 
@@ -412,38 +417,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             {project.description}
             <br />
             <br />
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-            quas ab iure eum assumenda nostrum, sunt quos nulla voluptate,
-            debitis reprehenderit dolorem, facilis atque doloribus! Explicabo
-            laboriosam quam dolores perferendis.
           </motion.p>
-
-          {/* Key features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
-            className="space-y-4"
-          >
-            <h3 className="text-lg font-medium text-white">Key Features</h3>
-            <ul className="space-y-2">
-              {["Feature 1", "Feature 2", "Feature 3"].map((feature, i) => (
-                <motion.li
-                  key={i}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4 + i * 0.1, duration: 0.3 }}
-                  className="flex items-start gap-2"
-                >
-                  <div className="mt-1 text-primary-400">→</div>
-                  <span className="text-gray-300">
-                    {feature} with some additional explanation of what this
-                    feature does and why it matters.
-                  </span>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
 
           {/* Action buttons */}
           <motion.div
@@ -670,113 +644,114 @@ const getProjectIcon = (index: number): React.ReactNode => {
 const defaultProjects: ProjectData[] = [
   {
     id: 1,
-    title: "Neural Fusion Dashboard",
+    title: "Health Care Reporting",
     description:
-      "A powerful analytics dashboard for monitoring and visualizing neural network performance in real-time.",
+      "I contributed to and later led the development of the Health Care Reporting project for an USA client, managing over five updates in a year. The project focused on enhancing claims management, ensuring compliance, and optimizing health plan spending for Plan Sponsors and Vendors.",
     image: {
-      src: "/project1.jpg",
-      alt: "Neural Fusion Dashboard Screenshot",
+      src: "/cc.png",
+      alt: "Health Care Reporting",
     },
     technologies: [
-      { name: "React", color: "#61DAFB" },
-      { name: "TypeScript", color: "#3178C6" },
-      { name: "TensorFlow.js", color: "#FF6F00" },
-      { name: "D3.js", color: "#F9A03C" },
+      { name: "React.Js", color: "#61DAFB" },
+      { name: "Javascript", color: "#3178C6" },
+      { name: "Python", color: "#FF6F00" },
+      { name: "Django", color: "#F9A03C" },
     ],
-    liveUrl: "https://example.com/project1",
-    githubUrl: "https://github.com/example/project1",
+    liveUrl: "",
+    githubUrl: "",
     featured: true,
   },
   {
     id: 2,
-    title: "Quantum Portfolio",
+    title: "Value IT Service",
     description:
-      "A responsive portfolio template with advanced animations and 3D effects for creative professionals.",
+      "I built a platform for a ship owner’s fleet management system, where employees could log complaints, get assigned engineers, chat to resolve issues, and raise support tickets—all integrated within a React/Next.js interface.",
     image: {
-      src: "/project2.jpg",
-      alt: "Quantum Portfolio Screenshot",
+      src: "/cc.png",
+      alt: "Value IT Service",
     },
     technologies: [
-      { name: "Next.js", color: "#0070F3" },
-      { name: "Three.js", color: "#FFFFFF" },
-      { name: "GSAP", color: "#88CE02" },
-      { name: "Tailwind CSS", color: "#06B6D4" },
+      { name: "React.Js", color: "#0070F3" },
+      { name: "Javascript", color: "#FFFFFF" },
+      { name: "Python", color: "#88CE02" },
+      { name: "Django", color: "#06B6D4" },
     ],
-    liveUrl: "https://example.com/project2",
-    githubUrl: "https://github.com/example/project2",
+    liveUrl: "",
+    githubUrl: "",
   },
   {
     id: 3,
-    title: "EcoTrack Mobile",
+    title: "Booking Route",
     description:
-      "A cross-platform mobile application for tracking personal carbon footprint and suggesting eco-friendly alternatives.",
+      "I’ve worked on a travel platform similar to MakeMyTrip, where users can explore offbeat destinations, chat with agents, and get customized package estimates using React and Next.js.",
     image: {
       src: "/project3.jpg",
       alt: "EcoTrack Mobile Screenshot",
     },
     technologies: [
-      { name: "React Native", color: "#61DAFB" },
-      { name: "Firebase", color: "#FFCA28" },
-      { name: "Redux", color: "#764ABC" },
-      { name: "Node.js", color: "#339933" },
+      { name: "Python", color: "#61DAFB" },
+      { name: "Django", color: "#FFCA28" },
+      { name: "MySQL", color: "#764ABC" },
+      { name: "Web Socket", color: "#339933" },
     ],
-    liveUrl: "https://example.com/project3",
-    githubUrl: "https://github.com/example/project3",
+    liveUrl: "https://bookingroute.com/",
+    githubUrl: "",
+    featured: true,
   },
   {
     id: 4,
-    title: "Harmonic AI Assistant",
+    title: "Teachia",
     description:
-      "An AI-powered virtual assistant with natural language processing capabilities for task automation and information retrieval.",
+      "I collaborated for development of   an educational platform where students can attend live classes, access resources, and collaborate with peers, using React for the front-end and Next.js for server-side rendering and fast performance.",
     image: {
       src: "/project4.jpg",
       alt: "Harmonic AI Assistant Screenshot",
     },
     technologies: [
       { name: "Python", color: "#3776AB" },
-      { name: "PyTorch", color: "#EE4C2C" },
-      { name: "FastAPI", color: "#009688" },
-      { name: "Docker", color: "#2496ED" },
+      { name: "Django", color: "#EE4C2C" },
+      { name: "Rest API", color: "#009688" },
+      { name: "Postgres", color: "#2496ED" },
     ],
-    liveUrl: "https://example.com/project4",
-    githubUrl: "https://github.com/example/project4",
-    featured: true,
+    liveUrl: "https://teachia.com/",
+    githubUrl: "",
   },
   {
     id: 5,
-    title: "Blockchain Explorer",
+    title: "Pranatah Tech Solution",
     description:
-      "A comprehensive blockchain explorer with real-time transaction monitoring and intuitive visualization tools.",
+      "I worked on the development of an e-commerce-style website for a client selling web services. The platform is designed to offer a seamless online experience for purchasing various web services. Created a quotation generator which gives user a budget friendly quoatation with cutom page selection to create a website.",
     image: {
       src: "/project5.jpg",
       alt: "Blockchain Explorer Screenshot",
     },
     technologies: [
-      { name: "Vue.js", color: "#4FC08D" },
-      { name: "Web3.js", color: "#F16822" },
-      { name: "GraphQL", color: "#E10098" },
-      { name: "Express", color: "#000000" },
+      { name: "Next.js", color: "#4FC08D" },
+      { name: "Node.js", color: "#F16822" },
+      { name: "Mongo", color: "#E10098" },
+      { name: "AWS", color: "#000000" },
     ],
-    liveUrl: "https://example.com/project5",
-    githubUrl: "https://github.com/example/project5",
+    liveUrl: "https://www.pranatahtechsolution.com/",
+    githubUrl: "",
   },
   {
     id: 6,
-    title: "Nebula Design System",
+    title: "Wordpal",
     description:
-      "A comprehensive UI component library and design system for streamlined development of consistent web applications.",
+      "Grammarly-like Website & Extension: I developed a website and extension similar to Grammarly, offering real-time grammar and spelling checks, using React and integrating a custom NLP API for text analysis.",
     image: {
       src: "/project6.jpg",
-      alt: "Nebula Design System Screenshot",
+      alt: "Wordpal",
     },
     technologies: [
-      { name: "Storybook", color: "#FF4785" },
-      { name: "Styled Components", color: "#DB7093" },
-      { name: "Jest", color: "#C21325" },
-      { name: "Rollup", color: "#FF3E00" },
+      { name: "Next.Js", color: "#FF4785" },
+      { name: "Javascript", color: "#DB7093" },
+      { name: "MySQl", color: "#C21325" },
+      { name: "Extension", color: "#FF3E00" },
     ],
-    liveUrl: "https://example.com/project6",
-    githubUrl: "https://github.com/example/project6",
+    liveUrl: "",
+    githubUrl: "",
+    featured: true,
   },
 ];
 

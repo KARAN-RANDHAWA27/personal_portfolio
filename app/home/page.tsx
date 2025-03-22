@@ -5,7 +5,7 @@ import CareerSection from "@/components/Career";
 import EducationSection from "@/components/Education";
 import SkillsSection from "@/components/Skills";
 import ProjectsSection from "@/components/Projects";
-import TestimonialSection from "@/components/Testimonials";
+// import TestimonialSection from "@/components/Testimonials";
 import ContactForm from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -21,7 +21,7 @@ const HomePage = () => {
       <EducationSection />
       <SkillsSection />
       <ProjectsSection />
-      <TestimonialSection />
+      {/* <TestimonialSection /> */}
       <ContactForm />
       <Footer />
     </div>

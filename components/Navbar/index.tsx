@@ -81,14 +81,14 @@ const Navbar = () => {
             >
               Projects
             </Link>
-            <Link
+            {/* <Link
               href="/testimonials"
               className={`block ${
                 pathname === "/testimonials" ? "text-purple" : "text-white"
               }   text-xl`}
             >
               Testimonials
-            </Link>
+            </Link> */}
           </nav>
         </div>
       </div>
