@@ -114,7 +114,7 @@ const Hero = () => {
             </p>
             <div className="flex flex-wrap md:flex-nowrap gap-4 md:space-x-6">
               <motion.a
-                href="/my-cv.pdf"
+                href="/Karan.pdf"
                 download
                 className="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-3 rounded-full flex items-center transition-all duration-300 shadow-lg shadow-primary-500/20"
                 whileHover={{ scale: 1.05 }}
