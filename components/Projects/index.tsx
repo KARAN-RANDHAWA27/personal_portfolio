@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/jsx-key */
 "use client";
 import React, { useRef, useState } from "react";
@@ -342,21 +343,14 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Project Image - left side on desktop */}
         <div className="relative h-[300px] md:h-full">
-          {/* For demo, using a gradient instead of real image */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `linear-gradient(to bottom right, ${getGradientColors(
-                index
-              )})`,
-              opacity: 0.9,
-            }}
-          ></div>
-
-          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div className="text-white opacity-30 text-8xl">
-              {getProjectIcon(index)}
-            </div>
+          {/* Project Image */}
+          <div className="absolute inset-0">
+            <img
+              src={project.image.src}
+              alt={project.image.alt}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40"></div>
           </div>
 
           {/* Technology badges at the bottom */}
@@ -665,7 +659,7 @@ const defaultProjects: ProjectData[] = [
     id: 2,
     title: "Value IT Service",
     description:
-      "I built a platform for a ship owner’s fleet management system, where employees could log complaints, get assigned engineers, chat to resolve issues, and raise support tickets—all integrated within a React/Next.js interface.",
+      "I built a platform for a ship owner's fleet management system, where employees could log complaints, get assigned engineers, chat to resolve issues, and raise support tickets—all integrated within a React/Next.js interface.",
     image: {
       src: "/cc.png",
       alt: "Value IT Service",
@@ -683,9 +677,9 @@ const defaultProjects: ProjectData[] = [
     id: 3,
     title: "Booking Route",
     description:
-      "I’ve worked on a travel platform similar to MakeMyTrip, where users can explore offbeat destinations, chat with agents, and get customized package estimates using React and Next.js.",
+      "I've worked on a travel platform similar to MakeMyTrip, where users can explore offbeat destinations, chat with agents, and get customized package estimates using React and Next.js.",
     image: {
-      src: "/project3.jpg",
+      src: "/cc.png",
       alt: "EcoTrack Mobile Screenshot",
     },
     technologies: [
@@ -704,7 +698,7 @@ const defaultProjects: ProjectData[] = [
     description:
       "I collaborated for development of   an educational platform where students can attend live classes, access resources, and collaborate with peers, using React for the front-end and Next.js for server-side rendering and fast performance.",
     image: {
-      src: "/project4.jpg",
+      src: "/cc.png",
       alt: "Harmonic AI Assistant Screenshot",
     },
     technologies: [
@@ -722,7 +716,7 @@ const defaultProjects: ProjectData[] = [
     description:
       "I worked on the development of an e-commerce-style website for a client selling web services. The platform is designed to offer a seamless online experience for purchasing various web services. Created a quotation generator which gives user a budget friendly quoatation with cutom page selection to create a website.",
     image: {
-      src: "/project5.jpg",
+      src: "/cc.png",
       alt: "Blockchain Explorer Screenshot",
     },
     technologies: [
@@ -736,11 +730,11 @@ const defaultProjects: ProjectData[] = [
   },
   {
     id: 6,
-    title: "Wordpal",
+    title: "Decentralized Voting System",
     description:
-      "Grammarly-like Website & Extension: I developed a website and extension similar to Grammarly, offering real-time grammar and spelling checks, using React and integrating a custom NLP API for text analysis.",
+      "The Voting DApp (Decentralized Application) is a blockchain-based voting platform that allows users to cast votes on various options securely and transparently. The application utilizes smart contracts to manage the voting process, ensuring that votes are immutable and verifiable.",
     image: {
-      src: "/project6.jpg",
+      src: "/image.png",
       alt: "Wordpal",
     },
     technologies: [
