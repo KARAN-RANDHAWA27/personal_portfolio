@@ -76,7 +76,7 @@ const EducationSection: React.FC = () => {
     {
       id: 3,
       degree: "Secondary Schooling",
-      institution: "Cloud Computing Institute",
+      institution: "NML.KPS",
       location: "Online",
       period: "2017",
       gpa: "8/10",
